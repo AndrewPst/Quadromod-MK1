@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CustomControls="clr-namespace:Robot_spider.CustomControls"
+             xmlns:ValueConverters="clr-namespace:Robot_spider.ValueConverters"
+             xmlns:viewModel="clr-namespace:Robot_spider.ViewModels"
+             x:Class="Robot_spider.Views.MainPage">
+    <ContentPage.BindingContext>
+        <viewModel:MainPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Slider" x:Key="DefaultSlider">
+                <Setter Property="MinimumTrackColor" Value="WhiteSmoke"/>
+                <Setter Property="MaximumTrackColor" Value="Gray"/>
+                <Setter Property="ThumbColor" Value="White"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <Grid RowDefinitions="*,1.5*" Padding="15">
+        <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="#23242F" CornerRadius="6" Margin="30, 5">
+            <Grid Grid.Row="0" ColumnDefinitions="3*, *">
+
+                <Grid  RowDefinitions="*,*,*" ColumnDefinitions="*, auto" >
+                    <Slider Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultSlider}" Value="{Binding ServoSpeed}" Maximum="100" Minimum="0"/>
+                    <Label Text="Servo speed" HorizontalTextAlignment="End" HorizontalOptions="End" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center"/>
+                    <Slider Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultSlider}"  Value="{Binding ZOffset}"  Maximum="100" Minimum="0"/>
+                    <Label Text="Z offset" HorizontalTextAlignment="End" HorizontalOptions="End" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
+                    <Slider Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultSlider}" Value="{Binding AccValue}" Minimum="0" Maximum="2"/>
+                    <Label Text="Acceleration" HorizontalTextAlignment="End" HorizontalOptions="End" Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
+                </Grid>
+                <StackLayout  Grid.Row="0" Grid.Column="1" Orientation="Vertical">
+                    <Button Text="Disconnect" FontAttributes="Bold" FontSize="16" CornerRadius="6" 
+                        BackgroundColor="#B9ACAE" TextColor="#23242F" Command="{Binding DisconnectCommand}"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Picker SelectedIndex="{Binding SelectedCUstomAction}" ItemsSource="{Binding customActions}" HorizontalOptions="FillAndExpand"/>
+                        <Button Text="Play" HorizontalOptions="End"  FontAttributes="Bold" FontSize="16" CornerRadius="6" 
+                            BackgroundColor="LightGreen" TextColor="#23242F" Command="{Binding PlayCommand}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </Frame>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*, *, *" HorizontalOptions="FillAndExpand" >
+
+
+            <CustomControls:JoystickControl x:Name="Joystick_left" BackgroundColor="Transparent" 
+                                        VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                                        HeightRequest="220" WidthRequest="220" Grid.Column="0" 
+                                        Xposition="{Binding JLeftX, Mode=TwoWay}" Yposition="{Binding JLeftY, Mode=TwoWay}"
+                                        Angle="{Binding JLeftA, Mode=TwoWay}" Distance="{Binding JLeftD, Mode=TwoWay}"/>
+
+
+            <CustomControls:JoystickControl x:Name="Joystick_right" BackgroundColor="Transparent" 
+                                        VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                                        HeightRequest="220" WidthRequest="220" Grid.Column="2"
+                                        Xposition="{Binding JRightX, Mode=TwoWay}" Yposition="{Binding JRightY, Mode=TwoWay}"
+                                        Angle="{Binding JRightA, Mode=TwoWay}" Distance="{Binding JRightD, Mode=TwoWay}"/>
+
+            <StackLayout Orientation="Vertical" Grid.Column="1"  HorizontalOptions="FillAndExpand">
+
+                <StackLayout Orientation="Vertical" VerticalOptions="Center" Grid.Column="2" Grid.Row="1" HorizontalOptions="FillAndExpand">
+                    <ListView ItemsSource="{Binding modeItems}" SelectionMode="None" SeparatorColor="Transparent" 
+                          HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.View>
+                                        <StackLayout VerticalOptions="Center">
+                                            <Label Text="{Binding Name}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                                        <Setter Property="TextColor" Value="White"/>
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                        </StackLayout>
+                                    </ViewCell.View>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Slider  Minimum="0" Maximum="3" Value="{Binding Value, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Style="{StaticResource DefaultSlider}"/>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+
+        <!--<Grid BindingContext="{x:Reference Name=Joystick_left}" RowDefinitions="*,*,*,*" ColumnDefinitions="*,*" 
+              Grid.Column="0" Grid.Row="0">
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ValueConverters:DummyValueConverter x:Key="dummyConverter"/>
+                    <Style TargetType="Label">
+                        <Setter Property="HorizontalOptions" Value="Center"/>
+                        <Setter Property="VerticalOptions" Value="Center"/>
+                    </Style>
+                </ResourceDictionary>
+            </Grid.Resources>
+
+            <Label Text="Xposition" Grid.Row="0" Grid.Column="0"/>
+            <Label Text="{Binding Xposition}" Grid.Row="0" Grid.Column="1"/>
+
+            <Label Text="Yposition" Grid.Row="1"  Grid.Column="0"/>
+            <Label Text="{Binding Yposition}" Grid.Row="1" Grid.Column="1"/>
+
+            <Label Text="Distance" Grid.Row="2"  Grid.Column="0"/>
+            <Label Text="{Binding Distance}" Grid.Row="2" Grid.Column="1"/>
+
+            <Label Text="Angle" Grid.Row="3"  Grid.Column="0"/>
+            <Label Text="{Binding Angle}" Grid.Row="3" Grid.Column="1"/>
+
+        </Grid>
+
+        <Grid BindingContext="{x:Reference Name=Joystick_right}" RowDefinitions="*,*,*,*" ColumnDefinitions="*,*" 
+              Grid.Column="1" Grid.Row="0">
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ValueConverters:DummyValueConverter x:Key="dummyConverter"/>
+                    <Style TargetType="Label">
+                        <Setter Property="HorizontalOptions" Value="Center"/>
+                        <Setter Property="VerticalOptions" Value="Center"/>
+                    </Style>
+                </ResourceDictionary>
+            </Grid.Resources>
+
+            <Label Text="Xposition" Grid.Row="0" Grid.Column="0"/>
+            <Label Text="{Binding Xposition}" Grid.Row="0" Grid.Column="1"/>
+
+            <Label Text="Yposition" Grid.Row="1"  Grid.Column="0"/>
+            <Label Text="{Binding Yposition}" Grid.Row="1" Grid.Column="1"/>
+
+            <Label Text="Distance" Grid.Row="2"  Grid.Column="0"/>
+            <Label Text="{Binding Distance}" Grid.Row="2" Grid.Column="1"/>
+
+            <Label Text="Angle" Grid.Row="3"  Grid.Column="0"/>
+            <Label Text="{Binding Angle}" Grid.Row="3" Grid.Column="1"/>
+
+        </Grid>-->
+
+    </Grid>
+</ContentPage>

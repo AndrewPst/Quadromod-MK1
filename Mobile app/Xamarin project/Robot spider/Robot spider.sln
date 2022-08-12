@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot spider.Android", "Robot spider.Android\Robot spider.Android.csproj", "{74901E10-47F8-4CEE-A0A6-1B4F2D6DBCCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot spider", "Robot spider\Robot spider.csproj", "{64C915A0-F627-4472-88C6-FCE83156AECF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74901E10-47F8-4CEE-A0A6-1B4F2D6DBCCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74901E10-47F8-4CEE-A0A6-1B4F2D6DBCCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74901E10-47F8-4CEE-A0A6-1B4F2D6DBCCD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{74901E10-47F8-4CEE-A0A6-1B4F2D6DBCCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74901E10-47F8-4CEE-A0A6-1B4F2D6DBCCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74901E10-47F8-4CEE-A0A6-1B4F2D6DBCCD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{64C915A0-F627-4472-88C6-FCE83156AECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64C915A0-F627-4472-88C6-FCE83156AECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64C915A0-F627-4472-88C6-FCE83156AECF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{64C915A0-F627-4472-88C6-FCE83156AECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64C915A0-F627-4472-88C6-FCE83156AECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64C915A0-F627-4472-88C6-FCE83156AECF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8AB57AF2-B6E8-4BA0-AD1D-6DCDE793547D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Robot_spider.Views.BtDevicesPage"
+             xmlns:viewModel="clr-namespace:Robot_spider.ViewModels">
+    <ContentPage.BindingContext>
+        <viewModel:BtDevicesPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Frame BackgroundColor="#3B3A3E" Margin="15" CornerRadius="10">
+            
+        <CollectionView ItemsSource="{Binding BondedDevices}" SelectedItem="{Binding SelectedDevice}" SelectionMode="Single"
+                        HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="5">
+
+                        <Label Text="{Binding Name}" TextColor="LightGray" FontSize="22" VerticalTextAlignment="Center"/>
+                        <Label Text="{Binding Address}" TextColor="Gray" FontSize="18" VerticalTextAlignment="Start"/>
+                        <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" Color="DarkGray"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        </Frame>
+    </StackLayout>
+</ContentPage>
